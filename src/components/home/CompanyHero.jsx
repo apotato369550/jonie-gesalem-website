@@ -1,7 +1,7 @@
 export default function CompanyHero() {
   return (
-    <section className="bg-white">
-      <div className="w-3/4 mx-auto px-6 py-48 flex items-center gap-0">
+    <section className="bg-white flex items-center min-h-[932px]">
+      <div className="w-3/4 mx-auto px-6 flex items-center gap-0">
 
         {/* Left half — logo + name */}
         <div className="w-1/2 flex items-center gap-8 pr-16 overflow-hidden">
