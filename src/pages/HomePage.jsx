@@ -1,6 +1,6 @@
 import CompanyHero from '../components/home/CompanyHero';
 import WhoAreWe from '../components/home/WhoAreWe';
-import DynamicCarousel from '../components/home/DynamicCarousel';
+import CompanyCarousel from '../components/home/CompanyCarousel';
 import HomeCTA from '../components/home/HomeCTA';
 
 export default function HomePage() {
@@ -8,7 +8,7 @@ export default function HomePage() {
     <>
       <CompanyHero />
       <WhoAreWe />
-      <DynamicCarousel />
+      <CompanyCarousel />
       <HomeCTA />
     </>
   );
