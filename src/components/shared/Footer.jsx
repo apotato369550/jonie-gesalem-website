@@ -13,7 +13,7 @@ export default function Footer() {
             <h3 className="font-display text-3xl font-semibold text-color-gold mb-2">
               Gesalem Group
             </h3>
-            <p className="font-body text-color-ink-on-dark max-w-sm">
+            <p className="font-body text-white max-w-sm">
               Building Cebu's future through entrepreneurship, civic excellence, and innovative ventures.
             </p>
           </div>
@@ -26,7 +26,7 @@ export default function Footer() {
             <h4 className="font-body font-semibold text-color-gold uppercase text-xs tracking-[0.1em] mb-4">
               About
             </h4>
-            <p className="font-body text-color-ink-on-dark text-sm leading-relaxed">
+            <p className="font-body text-white text-sm leading-relaxed">
               Gesalem Group encompasses diverse business ventures and civic contributions across multiple industries in the Visayas region.
             </p>
           </div>
@@ -34,19 +34,25 @@ export default function Footer() {
           {/* Location */}
           <div>
             <h4 className="font-body font-semibold text-color-gold uppercase text-xs tracking-[0.1em] mb-4">
-              Location
+              Contact
             </h4>
-            <p className="font-body text-color-ink-on-dark text-sm">
+            <p className="font-body text-white text-sm mb-2">
+              Phone: +63 (32) XXX-XXXX
+            </p>
+            <p className="font-body text-white text-sm mb-2">
+              Email: contact@gesalemgroup.ph
+            </p>
+            <p className="font-body text-white text-sm">
               Cebu, Philippines
             </p>
           </div>
 
-          {/* Contact */}
+          {/* Connect */}
           <div>
             <h4 className="font-body font-semibold text-color-gold uppercase text-xs tracking-[0.1em] mb-4">
               Connect
             </h4>
-            <p className="font-body text-color-ink-on-dark text-sm">
+            <p className="font-body text-white text-sm">
               Reach out to learn more about our ventures and partnerships.
             </p>
           </div>
@@ -54,10 +60,10 @@ export default function Footer() {
 
         {/* Copyright and Bottom Info */}
         <div className="flex flex-col sm:flex-row items-center justify-between pt-8 border-t border-color-gold border-opacity-20">
-          <p className="font-body text-color-ink-on-dark text-sm mb-4 sm:mb-0">
+          <p className="font-body text-white text-sm mb-4 sm:mb-0">
             © 2026 Gesalem Group. All rights reserved.
           </p>
-          <p className="font-body text-color-ink-on-dark text-sm">
+          <p className="font-body text-white text-sm">
             Cebu, Philippines
           </p>
         </div>

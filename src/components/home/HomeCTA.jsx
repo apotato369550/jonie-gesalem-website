@@ -4,13 +4,8 @@ export default function HomeCTA() {
   return (
     <section className="bg-white py-20 md:py-32">
       <div className="w-3/4 mx-auto px-6 text-center">
-        {/* Eyebrow Label */}
-        <p className="uppercase tracking-[0.15em] text-xs font-bold text-color-gold mb-3">
-          Next Steps
-        </p>
-
         {/* Heading */}
-        <h2 className="font-display font-semibold text-4xl md:text-5xl text-[#0D1F4E] mb-4">
+        <h2 className="font-display font-bold text-4xl md:text-5xl text-[#0D1F4E] mb-4">
           Want to Know More?
         </h2>
 
@@ -24,15 +19,15 @@ export default function HomeCTA() {
           {/* About Button - Gold Filled */}
           <Link
             to="/about"
-            className="inline-block px-8 py-3 bg-color-gold text-[#0D1F4E] font-display font-semibold rounded-lg hover:bg-opacity-90 transition-all"
+            className="inline-block px-8 py-3 bg-color-gold text-[#0D1F4E] font-body font-semibold rounded-lg hover:bg-opacity-90 transition-all"
           >
             About Jonie
           </Link>
 
-          {/* Contact Button - Outlined */}
+          {/* Contact Button - Gold Filled */}
           <Link
             to="/contact"
-            className="inline-block px-8 py-3 border-2 border-color-gold text-color-gold font-display font-semibold rounded-lg hover:bg-color-gold hover:text-[#0D1F4E] transition-all"
+            className="inline-block px-8 py-3 bg-color-gold text-[#0D1F4E] font-body font-semibold rounded-lg hover:bg-opacity-90 transition-all"
           >
             Get in Touch
           </Link>
