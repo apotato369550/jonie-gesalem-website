@@ -1,7 +1,7 @@
 export default function WhoAreWe() {
   return (
     <section
-      className="relative w-full py-24 md:py-36 overflow-hidden"
+      className="relative w-full py-24 md:py-36 overflow-hidden overflow-x-hidden"
       style={{
         backgroundImage: 'url(/assets/cebu_city.jpg)',
         backgroundSize: 'cover',
@@ -51,7 +51,7 @@ export default function WhoAreWe() {
             ];
             return (
               <div className="flex items-center justify-center">
-                <div className="relative" style={{ width: dim, height: dim, transform: 'translateX(-64px)' }}>
+                <div className="relative md:-translate-x-16" style={{ width: dim, height: dim }}>
                   {logos.map(({ src, alt }, i) => (
                     <div
                       key={alt}
@@ -77,8 +77,8 @@ export default function WhoAreWe() {
             className="rounded-xl p-12 md:p-16 shadow-2xl"
             style={{ backgroundColor: 'rgba(255,255,255,0.92)' }}
           >
-            <h2 className="font-display font-semibold text-5xl md:text-6xl text-color-blue-primary mb-12">
-              Lorem Ipsum Dolor
+            <h2 className="font-display font-semibold text-5xl md:text-6xl text-[#1B3A8F] mb-12">
+              Who Are We?
             </h2>
             <div className="space-y-6">
               <p className="font-body text-color-ink text-xl leading-relaxed">

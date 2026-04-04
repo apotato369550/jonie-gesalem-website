@@ -5,7 +5,7 @@ export default function HomeCTA() {
     <section className="bg-white py-20 md:py-32">
       <div className="w-3/4 mx-auto px-6 text-center">
         {/* Heading */}
-        <h2 className="font-display font-bold text-4xl md:text-5xl text-[#0D1F4E] mb-4">
+        <h2 className="font-display font-bold text-5xl md:text-6xl text-[#0D1F4E] mb-4">
           Want to Know More?
         </h2>
 
@@ -27,7 +27,7 @@ export default function HomeCTA() {
           {/* Contact Button - Gold Filled with Gold Border */}
           <Link
             to="/contact"
-            className="inline-block px-8 py-3 bg-gold border-2 border-gold text-[#0D1F4E] font-body font-semibold rounded-lg hover:bg-[#9a6f0f] hover:border-[#9a6f0f] transition-all"
+            className="inline-block px-8 py-3 bg-gold-pale border-2 border-gold-pale text-[#1B3A8F] font-body font-semibold rounded-lg hover:bg-gold-light hover:border-gold-light transition-all"
           >
             Get in Touch
           </Link>

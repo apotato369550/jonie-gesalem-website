@@ -22,17 +22,15 @@ export default function CompanyCarousel() {
   const carouselRef = useRef(null);
   const assetTimerRef = useRef(null);
 
-  // Filter to get only the featured companies
   const featuredCompanyIds = ['dunkin', 'jonies', 'grand-taishan'];
-  const carouselCompanies = companies.filter(company => 
+  const carouselCompanies = companies.filter(company =>
     featuredCompanyIds.includes(company.id)
   );
 
-  // Auto-rotate assets every 5 seconds
   useEffect(() => {
     const currentCompany = carouselCompanies[activeSlide];
     const assets = currentCompany?.carouselAssets || [];
-    
+
     if (assets.length > 1) {
       assetTimerRef.current = setInterval(() => {
         setActiveAssetIndex(prev => (prev + 1) % assets.length);
@@ -52,14 +50,14 @@ export default function CompanyCarousel() {
   };
 
   const goToPrevious = () => {
-    setActiveSlide(prev => 
+    setActiveSlide(prev =>
       prev === 0 ? carouselCompanies.length - 1 : prev - 1
     );
     setActiveAssetIndex(0);
   };
 
   const goToNext = () => {
-    setActiveSlide(prev => 
+    setActiveSlide(prev =>
       prev === carouselCompanies.length - 1 ? 0 : prev + 1
     );
     setActiveAssetIndex(0);
@@ -68,13 +66,11 @@ export default function CompanyCarousel() {
   if (carouselCompanies.length === 0) return null;
 
   const currentCompany = carouselCompanies[activeSlide];
-  const colors = companyColors[currentCompany.id];
   const currentAssets = currentCompany?.carouselAssets || [];
-  const currentAsset = currentAssets[activeAssetIndex];
 
   return (
     <section className="relative bg-white overflow-hidden min-h-screen flex items-center">
-      
+
       {/* Carousel slides container */}
       <div ref={carouselRef} className="relative w-full h-screen">
         {carouselCompanies.map((company, index) => {
@@ -82,7 +78,7 @@ export default function CompanyCarousel() {
           const isActive = index === activeSlide;
           const assets = company?.carouselAssets || [];
           const activeAsset = assets[activeAssetIndex] || assets[0];
-          
+
           return (
             <div
               key={company.id}
@@ -93,99 +89,109 @@ export default function CompanyCarousel() {
                 background: `linear-gradient(135deg, ${slideColors.primary} 0%, ${slideColors.secondary} 100%)`,
               }}
             >
-              {/* Slide content */}
-              <div className="h-full flex flex-col md:flex-row items-center justify-center px-6 py-12 md:py-0">
-                
-                {/* Asset/Media section - Left */}
-                <div className="w-full md:w-1/3 flex items-center justify-center mb-8 md:mb-0">
-                  {activeAsset && (
-                    <div className="w-full max-w-sm h-auto aspect-square rounded-lg overflow-hidden shadow-xl">
-                      {activeAsset.type === 'video' ? (
-                        <video
-                          src={activeAsset.src}
-                          autoPlay
-                          muted
-                          loop
-                          className="w-full h-full object-cover"
-                        />
-                      ) : (
-                        <img
-                          src={activeAsset.src}
-                          alt={`${company.name} asset`}
-                          className="w-full h-full object-cover"
-                        />
-                      )}
-                    </div>
-                  )}
-                </div>
 
-                {/* Slash separator - Hidden on mobile */}
-                <div className="hidden md:flex w-1/12 justify-center">
-                  <div className="w-1 h-32 bg-white opacity-50 transform -skew-x-12"></div>
+              {/* Mobile layout */}
+              <div className="md:hidden h-full flex flex-col items-center justify-center px-6 py-12 gap-8">
+                {activeAsset && (
+                  <div className="w-full max-w-sm aspect-square rounded-lg overflow-hidden shadow-xl">
+                    {activeAsset.type === 'video' ? (
+                      <video src={activeAsset.src} autoPlay muted loop className="w-full h-full object-cover" />
+                    ) : (
+                      <img src={activeAsset.src} alt={`${company.name} asset`} className="w-full h-full object-cover" />
+                    )}
+                  </div>
+                )}
+                <div className="flex flex-col items-center text-white text-center">
+                  <div className="inline-flex items-center justify-center bg-white rounded-2xl p-2 mb-4 shadow-[0_4px_24px_rgba(0,0,0,0.18)]">
+                    <img src={company.logo} alt={company.logoAlt} className="h-24 w-auto object-contain" />
+                  </div>
+                  <p
+                    className="font-body text-sm leading-relaxed max-w-xs rounded-xl py-5 px-6 mb-3 text-[#1C1A16]"
+                    style={{ backgroundColor: '#ffffff' }}
+                  >
+                    {company.desc}
+                  </p>
+                  <p
+                    className="font-body text-sm font-semibold leading-snug rounded-xl py-5 px-6 text-[#1C1A16] self-end text-right"
+                    style={{ backgroundColor: '#ffffff' }}
+                  >
+                    {company.name}
+                  </p>
                 </div>
+              </div>
 
-                {/* Logo and company info section - Right */}
-                <div className="w-full md:w-1/3 flex flex-col items-center md:items-start md:pl-8 text-white text-center md:text-left">
-                  <div className="flex items-center justify-center md:justify-start mb-6">
+              {/* Desktop layout — diagonal split */}
+              <div className="hidden md:block relative h-full">
+                {/* Media panel — full height, diagonal clip */}
+                {activeAsset && (
+                  <div
+                    className="absolute top-0 left-0 bottom-0 overflow-hidden z-[1]"
+                    style={{ width: '58%', clipPath: 'polygon(0 0, 100% 0, 82% 100%, 0 100%)' }}
+                  >
+                    {activeAsset.type === 'video' ? (
+                      <video src={activeAsset.src} autoPlay muted loop className="w-full h-full object-cover object-center" />
+                    ) : (
+                      <img src={activeAsset.src} alt={`${company.name} asset`} className="w-full h-full object-cover object-center" />
+                    )}
+                  </div>
+                )}
+
+                {/* Info panel — right side, layered over diagonal tail */}
+                <div
+                  className="absolute top-0 right-0 bottom-0 flex flex-col justify-center text-white z-[2]"
+                  style={{ width: '50%', paddingLeft: '48px', paddingRight: '48px' }}
+                >
+                  <div
+                    className="inline-flex items-center justify-center bg-white p-2 mb-6 shadow-[0_4px_24px_rgba(0,0,0,0.18)]"
+                    style={{ borderRadius: company.id === 'grand-taishan' ? '12px' : '16px' }}
+                  >
                     <img
                       src={company.logo}
                       alt={company.logoAlt}
-                      className="h-20 md:h-24 w-auto object-contain drop-shadow-lg"
+                      className={company.id === 'grand-taishan'
+                        ? 'h-48 lg:h-56 w-auto object-contain'
+                        : 'h-36 lg:h-44 w-auto object-contain'}
                     />
                   </div>
-                  <h2 className="font-display font-black text-3xl sm:text-4xl md:text-5xl leading-tight mb-4">
-                    {company.name}
-                  </h2>
-                  <p className="font-body text-sm sm:text-base md:text-lg leading-relaxed max-w-xl mb-4">
+                  <p
+                    className="font-body text-sm sm:text-base md:text-lg leading-relaxed max-w-xl mb-3 rounded-xl py-5 px-6 text-[#1C1A16]"
+                    style={{ backgroundColor: '#ffffff' }}
+                  >
                     {company.desc}
                   </p>
-                  <p className="font-body text-xs sm:text-sm font-semibold opacity-90">
-                    {company.city}
+                  <p
+                    className="font-body text-sm sm:text-base md:text-lg leading-snug max-w-xl rounded-xl py-5 px-6 text-[#1C1A16] self-end text-right"
+                    style={{ backgroundColor: '#ffffff' }}
+                  >
+                    Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis molestie dictum semper, nulla dui hendrerit est.
                   </p>
                 </div>
-
               </div>
+
             </div>
           );
         })}
       </div>
 
-      {/* Left arrow */}
-      <button
-        onClick={goToPrevious}
-        className="absolute left-6 top-1/2 transform -translate-y-1/2 z-10 bg-white bg-opacity-40 hover:bg-opacity-60 transition-all rounded-full p-3 md:p-4"
-        aria-label="Previous slide"
-      >
-        <svg className="w-5 h-5 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-        </svg>
-      </button>
-
-      {/* Right arrow */}
-      <button
-        onClick={goToNext}
-        className="absolute right-6 top-1/2 transform -translate-y-1/2 z-10 bg-white bg-opacity-40 hover:bg-opacity-60 transition-all rounded-full p-3 md:p-4"
-        aria-label="Next slide"
-      >
-        <svg className="w-5 h-5 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
-
-      {/* Dot pagination */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 flex gap-3">
-        {carouselCompanies.map((company, index) => (
-          <button
-            key={company.id}
-            onClick={() => goToSlide(index)}
-            className={`w-3 h-3 rounded-full transition-all ${
-              index === activeSlide
-                ? 'bg-white w-8'
-                : 'bg-white bg-opacity-50 hover:bg-opacity-75'
-            }`}
-            aria-label={`Go to slide ${index + 1}`}
-          />
-        ))}
+      {/* Bottom navigation — ‹ counter › replaces dot circles */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 flex items-center gap-6">
+        <button
+          onClick={goToPrevious}
+          className="text-white/60 hover:text-white text-3xl leading-none transition-all"
+          aria-label="Previous slide"
+        >
+          ‹
+        </button>
+        <span className="text-white/70 text-sm font-body tabular-nums">
+          {activeSlide + 1} / {carouselCompanies.length}
+        </span>
+        <button
+          onClick={goToNext}
+          className="text-white/60 hover:text-white text-3xl leading-none transition-all"
+          aria-label="Next slide"
+        >
+          ›
+        </button>
       </div>
 
     </section>

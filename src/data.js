@@ -5,7 +5,7 @@ export const companies = [
     city: 'Cebu Area — Franchise',
     logo: '/assets/logos/dunkin_new_logo.png',
     logoAlt: "Dunkin' logo",
-    desc: 'Franchise anchor. ~70 outlets across Cebu, Bohol, and Mindanao.',
+    desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
     carouselAssets: [
       { type: 'image', src: '/assets/carousell_assets/dunkin/dunkin_cebu_1.jpg' },
       { type: 'image', src: '/assets/carousell_assets/dunkin/dunkin_cebu_2.jpg' },
@@ -67,7 +67,7 @@ export const companies = [
     city: 'Cebu',
     logo: '/assets/logos/jonies.png',
     logoAlt: 'Jonies Sizzlers + Roast logo',
-    desc: 'Filipino comfort food with international influence. Est. 2000. Now franchising.',
+    desc: 'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est, mauris placerat eleifend leo.',
     carouselAssets: [
       { type: 'image', src: '/assets/carousell_assets/jonies/jonies_cebu_1.jpg' },
       { type: 'image', src: '/assets/carousell_assets/jonies/jonies_2.jpg' },
@@ -104,7 +104,7 @@ export const companies = [
     city: 'Cebu',
     logo: '/assets/logos/grand_taishan.png',
     logoAlt: 'Grand Taishan Construction logo',
-    desc: 'General and restoration construction. Est. 2019.',
+    desc: 'Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis.',
     carouselAssets: [
       { type: 'image', src: '/assets/carousell_assets/taishan/grand_taishan_jiann.avif' },
       { type: 'video', src: '/assets/carousell_assets/taishan/taishan_yukga.mp4' },
