@@ -1,49 +1,63 @@
 import { organizations } from '../../data';
 
 export default function Affiliations() {
+  const yap = organizations.find(o => o.id === 'yap-fraternity');
+  const rotary = organizations.find(o => o.id === 'rotary');
+
   return (
-    <section className="bg-color-off-white border-t border-color-divider-subtle py-24">
-      <div className="w-3/4 mx-auto px-6">
-        {/* Section Header */}
-        <div className="mb-16">
-          <p className="uppercase tracking-[0.15em] text-xs font-bold text-color-gold mb-4">
-            Service & Leadership
+    <section className="bg-color-off-white">
+      {/* T top: header — full width, centered */}
+      <div className="px-16 pt-24 pb-16 text-center">
+        <h2 className="font-display font-semibold text-5xl text-[#0D1F4E]">
+          Organizations
+        </h2>
+        <div className="w-16 h-1 bg-[#B8860B] mx-auto mt-6" />
+      </div>
+
+      {/* T stem: full-width split panels */}
+      <div className="flex flex-col md:flex-row">
+        {/* Left: Yap Fraternity — yellow */}
+        <div className="flex-none w-full md:w-1/2 bg-[#F5C800] flex flex-col items-start px-16 py-16">
+          <img
+            src="/assets/yap_logo.png"
+            alt="Yap Fraternity"
+            className="h-56 w-auto object-contain mb-8"
+          />
+          <div className="inline-block bg-[#1B6E3A] text-[#F5C800] px-3 py-1 rounded text-xs font-bold uppercase tracking-wider mb-4">
+            {yap?.badge}
+          </div>
+          <h3 className="font-display font-semibold text-5xl text-[#1B6E3A] mb-3 leading-tight">
+            {yap?.name}
+          </h3>
+          <p className="font-body text-sm uppercase tracking-[0.1em] text-[#1C0A00]/70 mb-6">
+            {yap?.detail}
           </p>
-          <h2 className="font-display font-semibold text-5xl text-[#0D1F4E] mb-6">
-            Organizations
-          </h2>
-          <div className="w-16 h-1 bg-color-gold"></div>
+          <p className="font-body text-lg text-[#1C0A00] leading-relaxed text-justify max-w-lg">
+            {yap?.description}
+          </p>
         </div>
 
-        {/* Grid of Organization Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {organizations.map((org) => (
-            <div
-              key={org.id}
-              className="bg-color-surface border border-color-divider-subtle p-8"
-              data-animate
-            >
-              {/* Badge */}
-              <div className="inline-block bg-[#0D1F4E] text-color-gold px-3 py-1 rounded text-xs font-bold uppercase tracking-wider mb-4">
-                {org.badge}
-              </div>
-
-              {/* Organization Name */}
-              <h3 className="font-display font-semibold text-2xl text-[#0D1F4E] mb-2">
-                {org.name}
-              </h3>
-
-              {/* Detail Line */}
-              <p className="font-body text-xs uppercase tracking-[0.1em] text-color-ink-muted mb-4">
-                {org.detail}
-              </p>
-
-              {/* Description */}
-              <p className="font-body text-color-ink-secondary leading-relaxed">
-                {org.description}
-              </p>
-            </div>
-          ))}
+        {/* Right: Rotary Club — royal blue */}
+        <div className="flex-none w-full md:w-1/2 bg-[#003E8A] flex flex-col items-start px-16 py-16">
+          <div className="bg-white rounded-xl p-4 shadow-lg inline-block mb-8">
+            <img
+              src="/assets/logos/rotary_club_of_cebu.png"
+              alt="Rotary Club of Cebu"
+              className="h-48 w-auto object-contain"
+            />
+          </div>
+          <div className="inline-block bg-white/20 text-white px-3 py-1 rounded text-xs font-bold uppercase tracking-wider mb-4">
+            {rotary?.badge}
+          </div>
+          <h3 className="font-display font-semibold text-5xl text-white mb-3 leading-tight">
+            {rotary?.name}
+          </h3>
+          <p className="font-body text-sm uppercase tracking-[0.1em] text-white/70 mb-6">
+            {rotary?.detail}
+          </p>
+          <p className="font-body text-lg text-white/90 leading-relaxed text-justify max-w-lg">
+            {rotary?.description}
+          </p>
         </div>
       </div>
     </section>

@@ -2,42 +2,35 @@ import { Link } from 'react-router-dom';
 
 export default function AboutCTA() {
   return (
-    <section className="bg-[#0D1F4E] py-24">
-      <div className="w-3/4 mx-auto px-6">
-        <div className="text-center max-w-2xl mx-auto">
-          {/* Eyebrow */}
-          <p className="uppercase tracking-[0.15em] text-xs font-bold text-color-gold mb-4">
-            Next Steps
-          </p>
+    <section className="bg-white py-20 md:py-32">
+      <div className="w-3/4 mx-auto px-6 text-center">
+        {/* Heading */}
+        <h2 className="font-display font-bold text-5xl md:text-6xl text-[#0D1F4E] mb-4">
+          Explore the Portfolio
+        </h2>
 
-          {/* Heading */}
-          <h2 className="font-display font-semibold text-4xl md:text-5xl text-white mb-6">
-            Explore the Portfolio
-          </h2>
+        {/* Blurb */}
+        <p className="font-body text-color-ink text-lg max-w-2xl mx-auto mb-10">
+          Discover the ventures, partnerships, and initiatives that define the Gesalem Group.
+        </p>
 
-          {/* Blurb */}
-          <p className="font-body text-white mb-12 leading-relaxed">
-            Discover the diverse ventures that define the Gesalem Group. From innovative food concepts to construction and real estate, our portfolio reflects decades of strategic growth and community impact.
-          </p>
+        {/* Button Group */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          {/* View Companies — Navy Border */}
+          <Link
+            to="/"
+            className="inline-block px-8 py-3 border-2 border-[#0D1F4E] text-[#0D1F4E] font-body font-semibold rounded-lg hover:bg-[#0D1F4E] hover:text-white transition-all"
+          >
+            View Companies
+          </Link>
 
-          {/* Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            {/* View Companies Button — Gold Filled */}
-            <Link
-              to="/"
-              className="inline-block bg-color-gold text-[#0D1F4E] px-8 py-3 font-body font-semibold rounded transition-all hover:bg-color-gold-light"
-            >
-              View Companies
-            </Link>
-
-            {/* Get in Touch Button — White Outlined */}
-            <Link
-              to="/contact"
-              className="inline-block border-2 border-color-ink-on-dark text-white px-8 py-3 font-body font-semibold rounded transition-all hover:bg-color-ink-on-dark hover:text-[#0D1F4E]"
-            >
-              Get in Touch
-            </Link>
-          </div>
+          {/* Get in Touch — Gold Pale */}
+          <Link
+            to="/contact"
+            className="inline-block px-8 py-3 bg-gold-pale border-2 border-gold-pale text-[#1B3A8F] font-body font-semibold rounded-lg hover:bg-gold-light hover:border-gold-light transition-all"
+          >
+            Get in Touch
+          </Link>
         </div>
       </div>
     </section>
