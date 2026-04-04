@@ -16,18 +16,18 @@ export default function HomeCTA() {
 
         {/* Button Group */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          {/* About Button - Gold Filled */}
+          {/* About Button - Navy Border */}
           <Link
             to="/about"
-            className="inline-block px-8 py-3 bg-color-gold text-[#0D1F4E] font-body font-semibold rounded-lg hover:bg-opacity-90 transition-all"
+            className="inline-block px-8 py-3 border-2 border-[#0D1F4E] text-[#0D1F4E] font-body font-semibold rounded-lg hover:bg-[#0D1F4E] hover:text-white transition-all"
           >
             About Jonie
           </Link>
 
-          {/* Contact Button - Gold Filled */}
+          {/* Contact Button - Gold Filled with Gold Border */}
           <Link
             to="/contact"
-            className="inline-block px-8 py-3 bg-color-gold text-[#0D1F4E] font-body font-semibold rounded-lg hover:bg-opacity-90 transition-all"
+            className="inline-block px-8 py-3 bg-gold border-2 border-gold text-[#0D1F4E] font-body font-semibold rounded-lg hover:bg-[#9a6f0f] hover:border-[#9a6f0f] transition-all"
           >
             Get in Touch
           </Link>

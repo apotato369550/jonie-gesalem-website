@@ -6,6 +6,11 @@ export const companies = [
     logo: '/assets/logos/dunkin_new_logo.png',
     logoAlt: "Dunkin' logo",
     desc: 'Franchise anchor. ~70 outlets across Cebu, Bohol, and Mindanao.',
+    carouselAssets: [
+      { type: 'image', src: '/assets/carousell_assets/dunkin/dunkin_cebu_1.jpg' },
+      { type: 'image', src: '/assets/carousell_assets/dunkin/dunkin_cebu_2.jpg' },
+      { type: 'image', src: '/assets/carousell_assets/dunkin/dunkin_cebu_3.jpg' },
+    ],
   },
   {
     id: 'queen-city',
@@ -63,6 +68,11 @@ export const companies = [
     logo: '/assets/logos/jonies.png',
     logoAlt: 'Jonies Sizzlers + Roast logo',
     desc: 'Filipino comfort food with international influence. Est. 2000. Now franchising.',
+    carouselAssets: [
+      { type: 'image', src: '/assets/carousell_assets/jonies/jonies_cebu_1.jpg' },
+      { type: 'image', src: '/assets/carousell_assets/jonies/jonies_2.jpg' },
+      { type: 'image', src: '/assets/carousell_assets/jonies/jonies_3.jpg' },
+    ],
   },
   {
     id: 'mix-eat',
@@ -95,6 +105,10 @@ export const companies = [
     logo: '/assets/logos/grand_taishan.png',
     logoAlt: 'Grand Taishan Construction logo',
     desc: 'General and restoration construction. Est. 2019.',
+    carouselAssets: [
+      { type: 'image', src: '/assets/carousell_assets/taishan/grand_taishan_jiann.avif' },
+      { type: 'video', src: '/assets/carousell_assets/taishan/taishan_yukga.mp4' },
+    ],
   },
   {
     id: 'gdc',
