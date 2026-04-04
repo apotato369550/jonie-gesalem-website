@@ -19,7 +19,7 @@ export default function HomeCTA() {
           {/* About Button - Navy Border */}
           <Link
             to="/about"
-            className="inline-block px-8 py-3 border-2 border-[#0D1F4E] text-[#0D1F4E] font-body font-semibold rounded-lg hover:border-[#1a2d5c] hover:bg-[#f9f9f9] transition-all"
+            className="inline-block px-8 py-3 border-2 border-[#0D1F4E] text-[#0D1F4E] font-body font-semibold rounded-lg hover:bg-[#0D1F4E] hover:text-white transition-all"
           >
             About Jonie
           </Link>
@@ -27,7 +27,7 @@ export default function HomeCTA() {
           {/* Contact Button - Gold Filled with Gold Border */}
           <Link
             to="/contact"
-            className="inline-block px-8 py-3 bg-color-gold border-2 border-color-gold text-[#0D1F4E] font-body font-semibold rounded-lg hover:bg-opacity-80 hover:border-opacity-80 transition-all"
+            className="inline-block px-8 py-3 bg-gold border-2 border-gold text-[#0D1F4E] font-body font-semibold rounded-lg hover:bg-[#9a6f0f] hover:border-[#9a6f0f] transition-all"
           >
             Get in Touch
           </Link>

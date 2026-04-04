@@ -3,7 +3,7 @@ export default function Footer() {
     <footer className="bg-[#0D1F4E] border-t border-white border-opacity-20 py-12 md:py-16">
       <div className="max-w-6xl mx-auto px-6">
         {/* Logo and Company Name Section */}
-        <div className="flex flex-col md:flex-row items-center md:items-start gap-8 mb-10 pb-10 border-b border-white border-opacity-30">
+        <div className="flex flex-col md:flex-row items-center md:items-start gap-8 mb-10 pb-10 border-b border-white">
           <img
             src="/assets/logos/gesalem_logo_nobg.png"
             alt="Gesalem Group Logo"
@@ -59,7 +59,7 @@ export default function Footer() {
         </div>
 
         {/* Copyright and Bottom Info */}
-        <div className="flex flex-col sm:flex-row items-center justify-between pt-8 border-t border-white border-opacity-20">
+        <div className="flex flex-col sm:flex-row items-center justify-between pt-8 border-t border-white">
           <p className="font-body text-white text-sm mb-4 sm:mb-0">
             © 2026 Gesalem Group. All rights reserved.
           </p>
