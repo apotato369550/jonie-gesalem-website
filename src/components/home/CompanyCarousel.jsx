@@ -92,13 +92,21 @@ export default function CompanyCarousel() {
 
               {/* Mobile layout */}
               <div className="md:hidden h-full flex flex-col items-center justify-center px-6 py-12 gap-8">
-                {activeAsset && (
-                  <div className="w-full max-w-sm aspect-square rounded-lg overflow-hidden shadow-xl">
-                    {activeAsset.type === 'video' ? (
-                      <video src={activeAsset.src} autoPlay muted loop className="w-full h-full object-cover" />
-                    ) : (
-                      <img src={activeAsset.src} alt={`${company.name} asset`} className="w-full h-full object-cover" />
-                    )}
+                {assets.length > 0 && (
+                  <div className="w-full max-w-sm aspect-square rounded-lg overflow-hidden shadow-xl relative">
+                    {assets.map((asset, assetIdx) => (
+                      <div
+                        key={assetIdx}
+                        className="absolute inset-0 transition-opacity duration-700"
+                        style={{ opacity: assetIdx === activeAssetIndex ? 1 : 0 }}
+                      >
+                        {asset.type === 'video' ? (
+                          <video src={asset.src} autoPlay muted loop className="w-full h-full object-cover" />
+                        ) : (
+                          <img src={asset.src} alt={`${company.name} asset`} className="w-full h-full object-cover" />
+                        )}
+                      </div>
+                    ))}
                   </div>
                 )}
                 <div className="flex flex-col items-center text-white text-center">
@@ -122,17 +130,25 @@ export default function CompanyCarousel() {
 
               {/* Desktop layout — diagonal split */}
               <div className="hidden md:block relative h-full">
-                {/* Media panel — full height, diagonal clip */}
-                {activeAsset && (
+                {/* Media panel — stacked layers for cross-fade */}
+                {assets.length > 0 && (
                   <div
                     className="absolute top-0 left-0 bottom-0 overflow-hidden z-[1]"
                     style={{ width: '58%', clipPath: 'polygon(0 0, 100% 0, 82% 100%, 0 100%)' }}
                   >
-                    {activeAsset.type === 'video' ? (
-                      <video src={activeAsset.src} autoPlay muted loop className="w-full h-full object-cover object-center" />
-                    ) : (
-                      <img src={activeAsset.src} alt={`${company.name} asset`} className="w-full h-full object-cover object-center" />
-                    )}
+                    {assets.map((asset, assetIdx) => (
+                      <div
+                        key={assetIdx}
+                        className="absolute inset-0 transition-opacity duration-700"
+                        style={{ opacity: assetIdx === activeAssetIndex ? 1 : 0 }}
+                      >
+                        {asset.type === 'video' ? (
+                          <video src={asset.src} autoPlay muted loop className="w-full h-full object-cover object-center" />
+                        ) : (
+                          <img src={asset.src} alt={`${company.name} asset`} className="w-full h-full object-cover object-center" />
+                        )}
+                      </div>
+                    ))}
                   </div>
                 )}
 
