@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { companies } from '../../data';
 
 const companyColors = {
@@ -18,7 +18,9 @@ const companyColors = {
 
 export default function CompanyCarousel() {
   const [activeSlide, setActiveSlide] = useState(0);
+  const [activeAssetIndex, setActiveAssetIndex] = useState(0);
   const carouselRef = useRef(null);
+  const assetTimerRef = useRef(null);
 
   // Filter to get only the featured companies
   const featuredCompanyIds = ['dunkin', 'jonies', 'grand-taishan'];
@@ -26,26 +28,49 @@ export default function CompanyCarousel() {
     featuredCompanyIds.includes(company.id)
   );
 
+  // Auto-rotate assets every 5 seconds
+  useEffect(() => {
+    const currentCompany = carouselCompanies[activeSlide];
+    const assets = currentCompany?.carouselAssets || [];
+    
+    if (assets.length > 1) {
+      assetTimerRef.current = setInterval(() => {
+        setActiveAssetIndex(prev => (prev + 1) % assets.length);
+      }, 5000);
+    }
+
+    return () => {
+      if (assetTimerRef.current) {
+        clearInterval(assetTimerRef.current);
+      }
+    };
+  }, [activeSlide, carouselCompanies]);
+
   const goToSlide = (index) => {
     setActiveSlide(index);
+    setActiveAssetIndex(0);
   };
 
   const goToPrevious = () => {
     setActiveSlide(prev => 
       prev === 0 ? carouselCompanies.length - 1 : prev - 1
     );
+    setActiveAssetIndex(0);
   };
 
   const goToNext = () => {
     setActiveSlide(prev => 
       prev === carouselCompanies.length - 1 ? 0 : prev + 1
     );
+    setActiveAssetIndex(0);
   };
 
   if (carouselCompanies.length === 0) return null;
 
   const currentCompany = carouselCompanies[activeSlide];
   const colors = companyColors[currentCompany.id];
+  const currentAssets = currentCompany?.carouselAssets || [];
+  const currentAsset = currentAssets[activeAssetIndex];
 
   return (
     <section className="relative bg-white overflow-hidden min-h-screen flex items-center">
@@ -55,6 +80,8 @@ export default function CompanyCarousel() {
         {carouselCompanies.map((company, index) => {
           const slideColors = companyColors[company.id];
           const isActive = index === activeSlide;
+          const assets = company?.carouselAssets || [];
+          const activeAsset = assets[activeAssetIndex] || assets[0];
           
           return (
             <div
@@ -69,24 +96,50 @@ export default function CompanyCarousel() {
               {/* Slide content */}
               <div className="h-full flex flex-col md:flex-row items-center justify-center px-6 py-12 md:py-0">
                 
-                {/* Logo section */}
-                <div className="w-full md:w-1/2 flex items-center justify-center md:justify-end mb-8 md:mb-0 md:pr-8">
-                  <img
-                    src={company.logo}
-                    alt={company.logoAlt}
-                    className="w-40 h-40 md:w-56 md:h-56 object-contain drop-shadow-lg"
-                  />
+                {/* Asset/Media section - Left */}
+                <div className="w-full md:w-1/3 flex items-center justify-center mb-8 md:mb-0">
+                  {activeAsset && (
+                    <div className="w-full max-w-sm h-auto aspect-square rounded-lg overflow-hidden shadow-xl">
+                      {activeAsset.type === 'video' ? (
+                        <video
+                          src={activeAsset.src}
+                          autoPlay
+                          muted
+                          loop
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <img
+                          src={activeAsset.src}
+                          alt={`${company.name} asset`}
+                          className="w-full h-full object-cover"
+                        />
+                      )}
+                    </div>
+                  )}
                 </div>
 
-                {/* Text section */}
-                <div className="w-full md:w-1/2 flex flex-col items-center md:items-start md:pl-8 text-white text-center md:text-left">
-                  <h2 className="font-display font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight mb-4">
+                {/* Slash separator - Hidden on mobile */}
+                <div className="hidden md:flex w-1/12 justify-center">
+                  <div className="w-1 h-32 bg-white opacity-50 transform -skew-x-12"></div>
+                </div>
+
+                {/* Logo and company info section - Right */}
+                <div className="w-full md:w-1/3 flex flex-col items-center md:items-start md:pl-8 text-white text-center md:text-left">
+                  <div className="flex items-center justify-center md:justify-start mb-6">
+                    <img
+                      src={company.logo}
+                      alt={company.logoAlt}
+                      className="h-20 md:h-24 w-auto object-contain drop-shadow-lg"
+                    />
+                  </div>
+                  <h2 className="font-display font-black text-3xl sm:text-4xl md:text-5xl leading-tight mb-4">
                     {company.name}
                   </h2>
-                  <p className="font-body text-base sm:text-lg md:text-xl leading-relaxed max-w-xl mb-4">
+                  <p className="font-body text-sm sm:text-base md:text-lg leading-relaxed max-w-xl mb-4">
                     {company.desc}
                   </p>
-                  <p className="font-body text-sm sm:text-base font-semibold opacity-90">
+                  <p className="font-body text-xs sm:text-sm font-semibold opacity-90">
                     {company.city}
                   </p>
                 </div>
