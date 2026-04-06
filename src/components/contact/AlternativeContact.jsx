@@ -1,50 +1,39 @@
 export default function AlternativeContact() {
   return (
-    <section className="bg-color-surface-warm border-t border-[#E8E0D0] py-16">
-      <div className="w-3/4 mx-auto px-6" data-animate>
-        {/* Eyebrow label */}
-        <div className="uppercase tracking-[0.15em] text-xs font-bold text-color-ink mb-8">
-          Other Ways to Reach Us
-        </div>
+    <section className="bg-[#0D1F4E] border-t border-white/20 py-16">
+      <div className="max-w-4xl mx-auto px-10 text-center">
+        <h2 className="font-display font-semibold text-5xl text-white mb-4">
+          Alternative Contacts
+        </h2>
+        <div className="w-16 h-1 bg-[#B8860B] mx-auto mb-12" />
 
-        {/* Two-column layout */}
-        <div className="grid grid-cols-2 gap-12 md:grid-cols-1 sm:grid-cols-1">
-          {/* Phone/Contact column */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          {/* Jonathan */}
           <div>
-            <h3 className="font-display font-semibold text-lg text-[#0D1F4E] mb-4">
-              Get in Touch
+            <h3 className="font-display font-semibold text-2xl text-white mb-2">
+              Jonathan Gesalem
             </h3>
-            <div className="space-y-3">
-              <p className="font-body text-color-ink">
-                <span className="text-color-ink-muted">Phone:</span>
-                <br />
-                +63 32 XXX XXXX
-              </p>
-              <p className="font-body text-color-ink">
-                <span className="text-color-ink-muted">Mobile:</span>
-                <br />
-                +63 9XX XXX XXXX
-              </p>
-            </div>
+            <p className="font-body text-xl text-white">Founder & Chairman</p>
+            <p className="font-body text-xl text-white mt-1">+63 32 XXX XXXX</p>
           </div>
 
-          {/* Online/Address column */}
+          {/* Jiaan */}
           <div>
-            <h3 className="font-display font-semibold text-lg text-[#0D1F4E] mb-4">
-              Find Us Online
+            <h3 className="font-display font-semibold text-2xl text-white mb-2">
+              Jiaan Gesalem
             </h3>
-            <div className="space-y-3">
-              <p className="font-body text-color-ink">
-                <span className="text-color-ink-muted">Web:</span>
-                <br />
-                wcgroup
-              </p>
-              <p className="font-body text-color-ink">
-                <span className="text-color-ink-muted">Address:</span>
-                <br />
-                Cebu, Philippines
-              </p>
-            </div>
+            <p className="font-body text-xl text-white">Operations Director</p>
+            <p className="font-body text-xl text-white mt-1">+63 9XX XXX XXXX</p>
+          </div>
+
+          {/* Office */}
+          <div>
+            <h3 className="font-display font-semibold text-2xl text-white mb-2">
+              Office
+            </h3>
+            <p className="font-body text-xl text-white">General Inquiries</p>
+            <p className="font-body text-xl text-white mt-1">contact@gesalemgroup.ph</p>
+            <p className="font-body text-xl text-white mt-1">Cebu, Philippines</p>
           </div>
         </div>
       </div>

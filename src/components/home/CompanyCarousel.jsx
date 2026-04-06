@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { companies } from '../../data';
 
 const companyColors = {
@@ -125,6 +126,21 @@ export default function CompanyCarousel() {
                   >
                     {company.name}
                   </p>
+                  <Link
+                    to={`/contact?company=${company.id}`}
+                    className="mt-2 inline-block px-8 py-3 border-2 border-white text-white font-body font-semibold rounded-lg transition-colors duration-200"
+                    style={{ backgroundColor: 'transparent' }}
+                    onMouseEnter={e => {
+                      e.currentTarget.style.backgroundColor = 'white';
+                      e.currentTarget.style.color = slideColors.primary;
+                    }}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                      e.currentTarget.style.color = 'white';
+                    }}
+                  >
+                    Inquire Now
+                  </Link>
                 </div>
               </div>
 
@@ -181,6 +197,23 @@ export default function CompanyCarousel() {
                   >
                     Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis molestie dictum semper, nulla dui hendrerit est.
                   </p>
+                  <div className="flex justify-center mt-4 max-w-xl">
+                    <Link
+                      to={`/contact?company=${company.id}`}
+                      className="inline-block px-8 py-3 border-2 border-white text-white font-body font-semibold rounded-lg transition-colors duration-200"
+                      style={{ backgroundColor: 'transparent' }}
+                      onMouseEnter={e => {
+                        e.currentTarget.style.backgroundColor = 'white';
+                        e.currentTarget.style.color = slideColors.primary;
+                      }}
+                      onMouseLeave={e => {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                        e.currentTarget.style.color = 'white';
+                      }}
+                    >
+                      Inquire Now
+                    </Link>
+                  </div>
                 </div>
               </div>
 

@@ -1,163 +1,175 @@
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { companies } from '../../data';
+
+const contactCompanyIds = ['dunkin', 'jonies', 'grand-taishan'];
+
+const companyColors = {
+  dunkin: { primary: '#FF6600', secondary: '#FF69B4' },
+  jonies: { primary: '#1A1A1A', secondary: '#FF6600' },
+  'grand-taishan': { primary: '#2D5F3F', secondary: '#FFD700' },
+};
+
 export default function ContactForm() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [fading, setFading] = useState(false);
+  const [searchParams] = useSearchParams();
+
+  const contactCompanies = companies.filter(c => contactCompanyIds.includes(c.id));
+
+  // Pre-select company from URL param (?company=dunkin)
+  useEffect(() => {
+    const company = searchParams.get('company');
+    if (company) {
+      const idx = contactCompanies.findIndex(c => c.id === company);
+      if (idx !== -1) setActiveIndex(idx);
+    }
+  }, []);
+
+  const handleSelect = (i) => {
+    if (i === activeIndex) return;
+    setFading(true);
+    setTimeout(() => {
+      setActiveIndex(i);
+      setFading(false);
+    }, 150);
+  };
+
   return (
-    <section className="bg-[#0D1F4E] py-24">
-      <div className="w-3/4 mx-auto px-6">
-        {/* Two-column layout */}
-        <div className="grid grid-cols-3 gap-12">
-          {/* LEFT: Contact Persons (~35%) */}
-          <div className="col-span-1">
-            {/* Eyebrow label */}
-            <div className="uppercase tracking-[0.15em] text-xs font-bold text-color-gold mb-8">
-              Reach Out To
+    <section className="relative min-h-screen overflow-hidden">
+      {/* Gradient backgrounds — stacked, cross-fade */}
+      {contactCompanies.map((company, i) => {
+        const c = companyColors[company.id];
+        return (
+          <div
+            key={company.id}
+            className="absolute inset-0 transition-opacity duration-500"
+            style={{
+              background: `linear-gradient(135deg, ${c.primary} 0%, ${c.secondary} 100%)`,
+              opacity: i === activeIndex ? 1 : 0,
+            }}
+          />
+        );
+      })}
+
+      {/* Right image panel — diagonal left edge */}
+      <div
+        className="absolute top-0 right-0 bottom-0 overflow-hidden z-[1]"
+        style={{ width: '48%', clipPath: 'polygon(18% 0, 100% 0, 100% 100%, 0 100%)' }}
+      >
+        {contactCompanies.map((company, i) => {
+          const asset = company.carouselAssets?.[0];
+          return (
+            <div
+              key={company.id}
+              className="absolute inset-0 transition-opacity duration-500"
+              style={{ opacity: i === activeIndex ? 1 : 0 }}
+            >
+              {asset?.type === 'video' ? (
+                <video src={asset.src} autoPlay muted loop className="w-full h-full object-cover" />
+              ) : (
+                <img src={asset?.src} alt={company.name} className="w-full h-full object-cover" />
+              )}
             </div>
+          );
+        })}
+      </div>
 
-            {/* Contact persons list */}
-            <div className="space-y-8">
-              {/* Contact person entry */}
-              <div>
-                <div className="flex items-start gap-4">
-                  {/* Avatar placeholder */}
-                  <div className="w-12 h-12 rounded-full bg-color-gold flex-shrink-0" />
-                  <div className="flex-1">
-                    <h3 className="font-display font-semibold text-white mb-1">
-                      Jonathan Gesalem
-                    </h3>
-                    <p className="text-xs text-color-gold uppercase tracking-[0.1em]">
-                      Founder & Chairman
-                    </p>
-                  </div>
-                </div>
-              </div>
+      {/* Left content: selector + form card — centered */}
+      <div
+        className="relative z-[2] flex items-center justify-center gap-8 min-h-screen py-16 px-10"
+        style={{ width: '60%' }}
+      >
+        {/* Vertical company selector */}
+        {/* Logo card: fixed 100×104px so all dots sit at identical vertical offsets.
+            Line: top/bottom = 52px (half of 104px card height) = dot centers */}
+        <div className="flex-none relative flex flex-col gap-10">
+          <div
+            className="absolute w-px bg-white/40"
+            style={{ top: '52px', bottom: '52px', right: '10px' }}
+          />
 
-              {/* Contact person entry */}
-              <div>
-                <div className="flex items-start gap-4">
-                  {/* Avatar placeholder */}
-                  <div className="w-12 h-12 rounded-full bg-color-gold flex-shrink-0" />
-                  <div className="flex-1">
-                    <h3 className="font-display font-semibold text-white mb-1">
-                      Jiaan Gesalem
-                    </h3>
-                    <p className="text-xs text-color-gold uppercase tracking-[0.1em]">
-                      Operations Director
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Contact person entry */}
-              <div>
-                <div className="flex items-start gap-4">
-                  {/* Avatar placeholder */}
-                  <div className="w-12 h-12 rounded-full bg-color-gold flex-shrink-0" />
-                  <div className="flex-1">
-                    <h3 className="font-display font-semibold text-white mb-1">
-                      Office
-                    </h3>
-                    <p className="text-xs text-color-gold uppercase tracking-[0.1em]">
-                      General Inquiries
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* RIGHT: Form (~65%) */}
-          <div className="col-span-2">
-            {/* Section header */}
-            <div className="mb-10">
-              <h2 className="font-display font-semibold text-2xl text-white">
-                Get In Touch
-              </h2>
-            </div>
-
-            {/* Contact form */}
-            <form className="space-y-6">
-              {/* Contact Type dropdown */}
-              <div>
-                <label className="block uppercase tracking-[0.12em] text-xs text-white font-bold mb-2">
-                  Contact Type
-                </label>
-                <select className="w-full bg-white border border-[#E8E0D0] rounded-sm px-4 py-3 font-body text-[1rem] text-color-ink focus:outline-none focus:border-color-gold">
-                  <option value="">Select a contact type</option>
-                  <option value="general">General Inquiry</option>
-                  <option value="franchise">Franchise Opportunity</option>
-                  <option value="partnership">Partnership</option>
-                  <option value="media">Media</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-
-              {/* Full Name */}
-              <div>
-                <label className="block uppercase tracking-[0.12em] text-xs text-white font-bold mb-2">
-                  Full Name
-                </label>
-                <input
-                  type="text"
-                  placeholder=""
-                  className="w-full bg-white border border-[#E8E0D0] rounded-sm px-4 py-3 font-body text-[1rem] text-color-ink focus:outline-none focus:border-color-gold"
-                />
-              </div>
-
-              {/* Phone Number */}
-              <div>
-                <label className="block uppercase tracking-[0.12em] text-xs text-white font-bold mb-2">
-                  Phone Number
-                </label>
-                <input
-                  type="tel"
-                  placeholder=""
-                  className="w-full bg-white border border-[#E8E0D0] rounded-sm px-4 py-3 font-body text-[1rem] text-color-ink focus:outline-none focus:border-color-gold"
-                />
-              </div>
-
-              {/* Email Address */}
-              <div>
-                <label className="block uppercase tracking-[0.12em] text-xs text-white font-bold mb-2">
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  placeholder=""
-                  className="w-full bg-white border border-[#E8E0D0] rounded-sm px-4 py-3 font-body text-[1rem] text-color-ink focus:outline-none focus:border-color-gold"
-                />
-              </div>
-
-              {/* Subject */}
-              <div>
-                <label className="block uppercase tracking-[0.12em] text-xs text-white font-bold mb-2">
-                  Subject
-                </label>
-                <input
-                  type="text"
-                  placeholder=""
-                  className="w-full bg-white border border-[#E8E0D0] rounded-sm px-4 py-3 font-body text-[1rem] text-color-ink focus:outline-none focus:border-color-gold"
-                />
-              </div>
-
-              {/* Message */}
-              <div>
-                <label className="block uppercase tracking-[0.12em] text-xs text-white font-bold mb-2">
-                  Message
-                </label>
-                <textarea
-                  rows="5"
-                  placeholder=""
-                  className="w-full bg-white border border-[#E8E0D0] rounded-sm px-4 py-3 font-body text-[1rem] text-color-ink focus:outline-none focus:border-color-gold resize-none"
-                />
-              </div>
-
-              {/* Submit button */}
-              <button
-                type="button"
-                className="w-full bg-color-gold text-[#0D1F4E] font-display font-semibold py-3 rounded-sm uppercase tracking-[0.1em] text-sm hover:opacity-90 transition-opacity"
+          {contactCompanies.map((company, i) => (
+            <button
+              key={company.id}
+              onClick={() => handleSelect(i)}
+              className="relative z-10 flex items-center gap-5 group cursor-pointer"
+              aria-label={company.name}
+            >
+              {/* Fixed-size logo card — ensures consistent row height for dot alignment */}
+              <div
+                className={`bg-white rounded-xl p-3 shadow-lg flex items-center justify-center flex-none transition-all duration-200 ${
+                  i === activeIndex ? 'opacity-100' : 'opacity-50 group-hover:opacity-80'
+                }`}
+                style={{ width: '100px', height: '104px' }}
               >
-                Send Message
-              </button>
-            </form>
-          </div>
+                <img
+                  src={company.logo}
+                  alt={company.logoAlt}
+                  className="h-20 max-w-[76px] w-auto object-contain"
+                />
+              </div>
+              {/* Dot */}
+              <div
+                className={`w-5 h-5 rounded-full border-2 border-white flex-none transition-all duration-200 ${
+                  i === activeIndex
+                    ? 'bg-white scale-125'
+                    : 'bg-transparent group-hover:bg-white/50'
+                }`}
+              />
+            </button>
+          ))}
+        </div>
+
+        {/* Form card — fixed width, smaller */}
+        <div
+          className="bg-white rounded-2xl shadow-2xl px-10 py-10"
+          style={{ width: '460px', transition: 'opacity 0.15s', opacity: fading ? 0 : 1 }}
+        >
+          <h2 className="font-display font-semibold text-5xl text-[#0D1F4E] mb-8 leading-tight">
+            Get In Touch
+          </h2>
+          <form className="space-y-5">
+            <select className="w-full border border-[#E8E0D0] rounded-lg px-4 py-3 font-body text-xl text-color-ink focus:outline-none focus:border-[#0D1F4E]">
+              <option value="">Contact Type</option>
+              <option value="general">General Inquiry</option>
+              <option value="franchise">Franchise Opportunity</option>
+              <option value="partnership">Partnership</option>
+              <option value="media">Media</option>
+              <option value="other">Other</option>
+            </select>
+            <input
+              type="text"
+              placeholder="Full Name"
+              className="w-full border border-[#E8E0D0] rounded-lg px-4 py-3 font-body text-xl text-color-ink placeholder:text-[#aaa] focus:outline-none focus:border-[#0D1F4E]"
+            />
+            <input
+              type="tel"
+              placeholder="Phone Number"
+              className="w-full border border-[#E8E0D0] rounded-lg px-4 py-3 font-body text-xl text-color-ink placeholder:text-[#aaa] focus:outline-none focus:border-[#0D1F4E]"
+            />
+            <input
+              type="email"
+              placeholder="Email Address"
+              className="w-full border border-[#E8E0D0] rounded-lg px-4 py-3 font-body text-xl text-color-ink placeholder:text-[#aaa] focus:outline-none focus:border-[#0D1F4E]"
+            />
+            <input
+              type="text"
+              placeholder="Subject"
+              className="w-full border border-[#E8E0D0] rounded-lg px-4 py-3 font-body text-xl text-color-ink placeholder:text-[#aaa] focus:outline-none focus:border-[#0D1F4E]"
+            />
+            <textarea
+              rows="4"
+              placeholder="Message"
+              className="w-full border border-[#E8E0D0] rounded-lg px-4 py-3 font-body text-xl text-color-ink placeholder:text-[#aaa] focus:outline-none focus:border-[#0D1F4E] resize-none"
+            />
+            <button
+              type="button"
+              className="w-full px-8 py-3 bg-white border-2 border-[#0D1F4E] text-[#0D1F4E] font-body font-semibold rounded-lg hover:bg-[#0D1F4E] hover:text-white transition-all text-xl"
+            >
+              Send Message
+            </button>
+          </form>
         </div>
       </div>
     </section>
