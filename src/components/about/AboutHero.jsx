@@ -1,17 +1,17 @@
 export default function AboutHero() {
   return (
-    <section className="min-h-screen md:h-[52vh] md:flex overflow-hidden">
-      {/* Left half: photo */}
-      <div className="w-full h-56 md:h-full md:w-1/2 flex-none overflow-hidden">
+    <section className="min-h-[70vh] md:h-[36vh] md:flex overflow-hidden">
+      {/* Left 40%: photo */}
+      <div className="w-full h-56 md:h-full md:w-[45%] flex-none overflow-hidden bg-[#0D1F4E]">
         <img
           src="/assets/uncle_jonie.jpg"
           alt="Jonathan Gesalem"
-          className="w-full h-full object-cover object-top"
+          className="w-full h-full object-contain object-top"
         />
       </div>
 
-      {/* Right half: navy background */}
-      <div className="w-full md:w-1/2 flex-none bg-[#0D1F4E] flex flex-col justify-center px-10 lg:px-14 py-8 md:overflow-y-auto">
+      {/* Right 60%: navy background */}
+      <div className="w-full md:w-[55%] flex-none bg-[#0D1F4E] flex flex-col justify-center px-10 lg:px-14 py-8 md:overflow-y-auto">
         {/* Name */}
         <h1 className="font-display font-black text-6xl md:text-7xl lg:text-8xl text-white leading-tight mb-3">
           Jonathan<br />

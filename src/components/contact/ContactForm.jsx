@@ -10,6 +10,12 @@ const companyColors = {
   'grand-taishan': { primary: '#2D5F3F', secondary: '#FFD700' },
 };
 
+const cardDimensions = {
+  dunkin: { width: '200px', height: '110px', imgClass: 'h-20 max-w-[170px] w-auto object-contain' },
+  jonies: { width: '200px', height: '110px', imgClass: 'h-20 max-w-[170px] w-auto object-contain' },
+  'grand-taishan': { width: '180px', height: '180px', imgClass: 'h-36 max-w-[150px] w-auto object-contain' },
+};
+
 export default function ContactForm() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [fading, setFading] = useState(false);
@@ -36,7 +42,7 @@ export default function ContactForm() {
   };
 
   return (
-    <section className="relative min-h-screen overflow-hidden">
+    <section className="relative min-h-[70vh] overflow-hidden">
       {/* Gradient backgrounds — stacked, cross-fade */}
       {contactCompanies.map((company, i) => {
         const c = companyColors[company.id];
@@ -77,8 +83,8 @@ export default function ContactForm() {
 
       {/* Left content: selector + form card — centered */}
       <div
-        className="relative z-[2] flex items-center justify-center gap-8 min-h-screen py-16 px-10"
-        style={{ width: '60%' }}
+        className="relative z-[2] flex items-center justify-center gap-8 min-h-[70vh] py-16 px-10"
+        style={{ width: '68%' }}
       >
         {/* Vertical company selector */}
         {/* Logo card: fixed 100×104px so all dots sit at identical vertical offsets.
@@ -86,7 +92,7 @@ export default function ContactForm() {
         <div className="flex-none relative flex flex-col gap-10">
           <div
             className="absolute w-px bg-white/40"
-            style={{ top: '52px', bottom: '52px', right: '10px' }}
+            style={{ top: '55px', bottom: '90px', right: '10px' }}
           />
 
           {contactCompanies.map((company, i) => (
@@ -101,12 +107,12 @@ export default function ContactForm() {
                 className={`bg-white rounded-xl p-3 shadow-lg flex items-center justify-center flex-none transition-all duration-200 ${
                   i === activeIndex ? 'opacity-100' : 'opacity-50 group-hover:opacity-80'
                 }`}
-                style={{ width: '100px', height: '104px' }}
+                style={{ width: cardDimensions[company.id].width, height: cardDimensions[company.id].height }}
               >
                 <img
                   src={company.logo}
                   alt={company.logoAlt}
-                  className="h-20 max-w-[76px] w-auto object-contain"
+                  className={cardDimensions[company.id].imgClass}
                 />
               </div>
               {/* Dot */}
@@ -124,7 +130,7 @@ export default function ContactForm() {
         {/* Form card — fixed width, smaller */}
         <div
           className="bg-white rounded-2xl shadow-2xl px-10 py-10"
-          style={{ width: '460px', transition: 'opacity 0.15s', opacity: fading ? 0 : 1 }}
+          style={{ width: '840px', transition: 'opacity 0.15s', opacity: fading ? 0 : 1 }}
         >
           <h2 className="font-display font-semibold text-5xl text-[#0D1F4E] mb-8 leading-tight">
             Get In Touch
